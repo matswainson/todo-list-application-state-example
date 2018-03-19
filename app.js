@@ -7,32 +7,34 @@
 		constructor(name) {
 			this.name = name;
 			this.state = new State(name);
-			this.date = document.querySelector('h2');
-			this.list = document.querySelector('ul');
-			this.button = document.querySelector('button');
-			this.form = document.querySelector('form');
-			this.input = document.querySelector('input');
+			this.dom = {
+				button: document.querySelector('button'),
+				date: 	document.querySelector('h2'),
+				list: 	document.querySelector('ul'),
+				form: 	document.querySelector('form'),
+				input:  document.querySelector('input')
+			};
 			this.bindEvents();
 			this.render();
 		}
 
 		bindEvents() {
-			this.list.addEventListener('click', this.handleClick.bind(this));
-			this.form.addEventListener('submit', this.submitForm.bind(this));
-			this.input.addEventListener('keyup', this.keyUp.bind(this));
-			this.input.addEventListener('focus', this.focus.bind(this));
-			this.input.addEventListener('blur', this.blur.bind(this));
-			this.button.addEventListener('focus', this.focus.bind(this));
-			this.button.addEventListener('blur', this.blur.bind(this));
+			this.dom.list.addEventListener('click', this.handleClick.bind(this));
+			this.dom.form.addEventListener('submit', this.submitForm.bind(this));
+			this.dom.input.addEventListener('keyup', this.keyUp.bind(this));
+			this.dom.input.addEventListener('focus', this.focus.bind(this));
+			this.dom.input.addEventListener('blur', this.blur.bind(this));
+			this.dom.button.addEventListener('focus', this.focus.bind(this));
+			this.dom.button.addEventListener('blur', this.blur.bind(this));
 		}
 
 		submitForm(event) {
 			event.preventDefault();
-			if (!this.input.value.length) {
+			if (!this.dom.input.value.length) {
 				return;
 			}
-			this.state.addItem(this.input.value);
-			this.input.value = '';
+			this.state.addItem(this.dom.input.value);
+			this.dom.input.value = '';
 			this.render();
 		}
 
@@ -52,6 +54,9 @@
 			this.render();
 		}
 
+
+
+
 		render() {
 			let listHTML = '';
 			for (const item of this.state.items) {
@@ -61,14 +66,18 @@
 				listHTML += item.value + '<button>x</button></li>';
 			}
 
-			this.date.innerHTML = this.state.date;
-			this.form.classList.toggle('focus', this.state.form.focus);
-			this.form.classList.toggle('valid', this.state.form.valid);
-			this.list.innerHTML = listHTML;
+			this.dom.date.innerHTML = this.state.date;
+			this.dom.form.classList.toggle('focus', this.state.form.focus);
+			this.dom.form.classList.toggle('valid', this.state.form.valid);
+			this.dom.list.innerHTML = listHTML;
 		}
 
+
+
+
+
 		keyUp() {
-			this.state.form.valid = (this.input.value.length) ? 1 : 0;
+			this.state.form.valid = (this.dom.input.value.length) ? 1 : 0;
 			this.render();
 		}
 
