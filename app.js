@@ -10,9 +10,9 @@
 			this.dom = {
 				button: document.querySelector('button'),
 				date: 	document.querySelector('h2'),
-				list: 	document.querySelector('ul'),
 				form: 	document.querySelector('form'),
-				input:  document.querySelector('input')
+				input:  document.querySelector('input'),
+				list: 	document.querySelector('ul')
 			};
 			this.bindEvents();
 			this.render();
@@ -54,9 +54,6 @@
 			this.render();
 		}
 
-
-
-
 		render() {
 			let listHTML = '';
 			for (const item of this.state.items) {
@@ -71,10 +68,6 @@
 			this.dom.form.classList.toggle('valid', this.state.form.valid);
 			this.dom.list.innerHTML = listHTML;
 		}
-
-
-
-
 
 		keyUp() {
 			this.state.form.valid = (this.dom.input.value.length) ? 1 : 0;

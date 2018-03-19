@@ -1,4 +1,3 @@
-
 ;(function(window, Store){
 
 	'use strict';
@@ -91,6 +90,3 @@
 	window.State = State;
 
 })(window, window.Store);
-
-
-
